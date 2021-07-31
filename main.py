@@ -10,10 +10,6 @@ def get_exif(filename):
     return image._getexif()
 
 
-exif = get_exif("images/test.jpg")
-print(exif)
-
-
 def get_geotagging(exif):
     if not exif:
         raise ValueError("No EXIF metadata found")
@@ -40,7 +36,6 @@ def get_coordinates(geotags):
 
 
 def get_decimal_from_dms(dms, ref):
-
     degrees = dms[0]
     minutes = dms[1] / 60.0
     seconds = dms[2] / 3600.0
@@ -53,11 +48,23 @@ def get_decimal_from_dms(dms, ref):
     return round(degrees + minutes + seconds, 5)
 
 
-geotags = get_geotagging(exif)
-print(get_coordinates(geotags))
+def get_longitude_latitude(path):
+    try:
+        exif = get_exif(path)
+        geotags = get_geotagging(exif)
+        coord = get_coordinates(geotags)
+        return coord
 
-for file in glob.glob("./images/*.jpg"):
-    print(file)
+    except ValueError as e:
+        print(e)
+        return None
+
+
+image_dir = "./images/*.jpg"
+
+for file in glob.glob(image_dir):
+    coord = get_longitude_latitude(file)
+    print(file, coord)
 
 if __name__ == "__main__":
     pass
