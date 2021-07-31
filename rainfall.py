@@ -47,5 +47,6 @@ with open(output_filename, "w") as f:
         final = "|".join(new_row)
         f.write(final)
 
+
 if __name__ == "__main__":
     pass
