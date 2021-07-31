@@ -1,6 +1,7 @@
 from PIL import Image
 from PIL.ExifTags import GPSTAGS
 from PIL.ExifTags import TAGS
+import glob, os
 
 
 def get_exif(filename):
@@ -54,6 +55,9 @@ def get_decimal_from_dms(dms, ref):
 
 geotags = get_geotagging(exif)
 print(get_coordinates(geotags))
+
+for file in glob.glob("./images/*.jpg"):
+    print(file)
 
 if __name__ == "__main__":
     pass
