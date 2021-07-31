@@ -9,7 +9,7 @@ def get_exif(filename):
     return image._getexif()
 
 
-exif = get_exif("test.jpg")
+exif = get_exif("images/test.jpg")
 print(exif)
 
 
